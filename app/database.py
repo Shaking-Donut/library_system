@@ -67,16 +67,54 @@ def database_init():
                         );"""))
     print(f"Table {DB_NAME}.books created successfully")
 
+    # create a table for storing branches of the library
+    cur.execute(sql.SQL("""CREATE TABLE branches (
+                        id SERIAL PRIMARY KEY, 
+                        name VARCHAR(100), 
+                        location VARCHAR(100)
+                        );"""))
+    print(f"Table {DB_NAME}.branches created successfully")
+
+    # create a table for storing users
+    cur.execute(sql.SQL("""CREATE TABLE users (
+                        id SERIAL PRIMARY KEY, 
+                        name VARCHAR(100), 
+                        email VARCHAR(100), 
+                        password VARCHAR(100)
+                        );"""))
+    print(f"Table {DB_NAME}.users created successfully")
+
     # populate the table with sample books data from books.json
     print(f"Populating table {DB_NAME}.books with sample data...")
 
-    with open("/workspaces/library_system/app/books.json", "r") as f:
+    with open("/workspaces/library_system/app/sample_data/books.json", "r") as f:
         books = json.load(f)
         for book in books:
             cur.execute(sql.SQL("""INSERT INTO books (title, author, year, isbn, branch, is_borrowed, date_borrowed, borrowed_by) 
                                 VALUES (%s, %s, %s, %s, %s, %s, %s, %s);"""),
                                 (book["title"], book["author"], book["year"], book["isbn"], book["branch"], book["is_borrowed"], book["date_borrowed"], book["borrowed_by"]))
-    print(f"Sample data inserted successfully, inserted {len(books)} books")
+    print(f"Sample books data inserted successfully, inserted {len(books)} books")
+
+    # populate the table with sample branches data from branches.json
+    print(f"Populating table {DB_NAME}.branches with sample data...")
+    with open("/workspaces/library_system/app/sample_data/branches.json", "r") as f:
+        branches = json.load(f)
+        for branch in branches:
+            cur.execute(sql.SQL("""INSERT INTO branches (name, location) 
+                                VALUES (%s, %s);"""),
+                                (branch["name"], branch["location"]))
+    print(f"Sample branch data inserted successfully, inserted {len(branches)} branches")
+
+    # populate the table with sample users data from users.json
+    print(f"Populating table {DB_NAME}.users with sample data...")
+    with open("/workspaces/library_system/app/sample_data/users.json", "r") as f:
+        users = json.load(f)
+        for user in users:
+            cur.execute(sql.SQL("""INSERT INTO users (name, email, password) 
+                                VALUES (%s, %s, %s);"""),
+                                (user["name"], user["email"], user["password"]))
+    print(f"Sample user data inserted successfully, inserted {len(users)} users")
+
 
 database_init()
 conn.close()

@@ -1,0 +1,17 @@
+[
+    {
+        "id": 1,
+        "name": "Biblioteka Główna w Krakowie",
+        "location": "ul. Rajska 1, 30-150 Kraków"
+    },
+    {
+        "id": 2,
+        "name": "Biblioteka Jagiellońska",
+        "location": "ul. Mickiewicza 22, 30-059 Kraków"
+    },
+    {
+        "id": 3,
+        "name": "Biblioteka Pedagogiczna w Krakowie",
+        "location": "ul. Podchorążych 2, 30-084 Kraków"
+    }
+]
