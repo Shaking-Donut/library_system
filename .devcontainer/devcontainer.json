@@ -19,7 +19,14 @@
 	],
 	"runArgs": [
 		"--add-host=host.docker.internal:host-gateway"
-	]
+	],
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"cweijan.vscode-database-client2"
+			]
+		}
+	}
 	// Uncomment the next line to run commands after the container is created.
 	// "postCreateCommand": "cat /etc/os-release",
 	// Configure tool-specific properties.
