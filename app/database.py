@@ -55,15 +55,15 @@ def database_init():
 
     # create a table for storing books
     cur.execute(sql.SQL("""CREATE TABLE books (
-                        id SERIAL PRIMARY KEY, 
-                        title VARCHAR(100), 
-                        author VARCHAR(100), 
-                        year INTEGER, 
-                        isbn VARCHAR(17),
-                        branch VARCHAR(100),
-                        is_borrowed BOOLEAN DEFAULT FALSE,
-                        date_borrowed DATE,
-                        borrowed_by VARCHAR(100)
+                        "id" SERIAL PRIMARY KEY, 
+                        "title" VARCHAR(100), 
+                        "author" VARCHAR(100), 
+                        "year" INTEGER, 
+                        "isbn" VARCHAR(17),
+                        "branch" VARCHAR(100),
+                        "is_borrowed" BOOLEAN DEFAULT FALSE,
+                        "date_borrowed" DATE,
+                        "borrowed_by" VARCHAR(100)
                         );"""))
     print(f"Table {DB_NAME}.books created successfully")
 
@@ -115,6 +115,40 @@ def database_init():
                                 (user["name"], user["email"], user["password"]))
     print(f"Sample user data inserted successfully, inserted {len(users)} users")
 
+def get_books() -> list[dict]:
+    cur.execute(sql.SQL("SELECT * FROM books;"))
+    books = cur.fetchall()
+    return books
 
-database_init()
+def get_book(book_id) -> dict:
+    cur.execute(sql.SQL("SELECT * FROM books WHERE id = %s;"), sql.Identifier(book_id))
+    book = cur.fetchone()
+    return book
+
+def add_book(title, author, year, isbn, branch) -> dict:
+    book_added = "siema"
+
+    try:
+        cur.execute(sql.SQL("""INSERT INTO books ("title", "author", "year", "isbn", "branch") 
+                            VALUES (%s, %s, %s, %s, %s) RETURNING *;"""),
+                            (title, author, year, isbn, branch))
+        book_added = cur.fetchone()
+    except Error as e:
+        print(f"Error adding book: {e}")
+    else:
+        print(f"Book added successfully: {book_added}")
+        return book_added
+
+def delete_book(book_id) -> bool:
+    try:
+        cur.execute(sql.SQL("DELETE FROM books WHERE id = %s;"), sql.Identifier(book_id))
+    except Error as e:
+        print(f"Error deleting book: {e}")
+        return False
+    else:
+        print(f"Book id={book_id} deleted successfully")
+        return True
+
+# database_init()
+add_book("The Alchenist", "Pauloo Coelho", 1989, "978-0062315807", "Fittion")
 conn.close()
