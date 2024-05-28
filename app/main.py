@@ -21,18 +21,22 @@ def login_user(login: str, password: str):
 
 # Book endpoints -----------------------------------------
 
-@app.get("/books")
+@app.get("/books/")
 def get_books() -> list[Book]:
     return database.get_books()
 
-@app.get("/book/{book_id}")
+@app.get("/book/{book_id}/")
 def get_book(book_id: int) -> Book:
     return database.get_book(book_id)
 
-@app.post("/book")
+@app.post("/book/")
 def add_book(book: Book_add) -> Book:
     return database.add_book(**book)
 
-@app.delete("/book/{book_id}")
+@app.delete("/book/{book_id}/")
 def delete_book(book_id: int) -> bool:
     return database.delete_book(book_id)
+
+@app.put("/book/{book_id}/borrow/{user_id}/")
+def borrow_book(book_id: int, user_id: int) -> bool:
+    return database.borrow_book(book_id, user_id)
