@@ -1,6 +1,7 @@
 import json
 from psycopg import connect, Error, sql
 from dotenv import dotenv_values
+from . import schemas
 
 if __name__ == "__main__":
     print("This file is not meant to be run directly")
@@ -119,17 +120,22 @@ def database_init():
                                 (user["name"], user["email"], user["password"]))
     print(f"Sample user data inserted successfully, inserted {len(users)} users")
 
-def get_books() -> list[dict]:
+def get_books() -> list[schemas.Book]:
     cur.execute(sql.SQL("SELECT * FROM books;"))
     books = cur.fetchall()
     return books
 
-def get_book(book_id) -> dict:
+def get_book(book_id) -> schemas.Book:
     cur.execute(sql.SQL("SELECT * FROM books WHERE id = %s;"), sql.Identifier(book_id))
     book = cur.fetchone()
     return book
 
-def add_book(title, author, year, isbn, branch) -> dict:
+def add_book(book: schemas.Book_add) -> schemas.Book:
+    title = book.title
+    author = book.author
+    year = book.year
+    isbn = book.isbn
+    branch = book.branch
     book_added = ""
 
     try:
@@ -153,6 +159,25 @@ def delete_book(book_id) -> bool:
         print(f"Book id={book_id} deleted successfully")
         return True
 
+def borrow_book(book_id, user_id) -> bool:
+    try:
+        cur.execute(sql.SQL("UPDATE books SET is_borrowed = TRUE, borrowed_by = %s WHERE id = %s;"), (user_id, book_id))
+    except Error as e:
+        print(f"Error borrowing book: {e}")
+        return False
+    else:
+        print(f"Book id={book_id} borrowed by user={user_id} successfully")
+        return True
+    
+def return_book(book_id):
+    try:
+        cur.execute(sql.SQL("UPDATE books SET is_borrowed = FALSE, borrowed_by = NULL WHERE id = %s;"), sql.Identifier(book_id))
+    except Error as e:
+        print(f"Error returning book: {e}")
+        return False
+    else:
+        print(f"Book id={book_id} returned successfully")
+        return True
 # database_init()
 # add_book("The Alchenist", "Pauloo Coelho", 1989, "978-0062315807", "Fittion")
 # conn.close()
