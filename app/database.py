@@ -2,6 +2,10 @@ import json
 from psycopg import connect, Error, sql
 from dotenv import dotenv_values
 
+if __name__ == "__main__":
+    print("This file is not meant to be run directly")
+    exit(1)
+
 CONNECTION_CONFIG = {
     'dbname': dotenv_values('.env')['DB_NAME'],
     'user': dotenv_values('.env')['DB_USER'],
@@ -126,7 +130,7 @@ def get_book(book_id) -> dict:
     return book
 
 def add_book(title, author, year, isbn, branch) -> dict:
-    book_added = "siema"
+    book_added = ""
 
     try:
         cur.execute(sql.SQL("""INSERT INTO books ("title", "author", "year", "isbn", "branch") 
@@ -150,5 +154,5 @@ def delete_book(book_id) -> bool:
         return True
 
 # database_init()
-add_book("The Alchenist", "Pauloo Coelho", 1989, "978-0062315807", "Fittion")
-conn.close()
+# add_book("The Alchenist", "Pauloo Coelho", 1989, "978-0062315807", "Fittion")
+# conn.close()
