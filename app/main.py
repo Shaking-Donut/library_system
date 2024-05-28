@@ -1,9 +1,10 @@
 from typing import Union
 
 from fastapi import FastAPI
+from . import database
+from .schemas import Book, Book_add
 
 app = FastAPI()
-
 
 @app.get("/")
 def read_root():
@@ -17,3 +18,21 @@ def read_item(item_id: int, q: Union[str, None] = None):
 @app.post("/login")
 def login_user(login: str, password: str):
     return login and password
+
+# Book endpoints -----------------------------------------
+
+@app.get("/books")
+def get_books() -> list[Book]:
+    return database.get_books()
+
+@app.get("/book/{book_id}")
+def get_book(book_id: int) -> Book:
+    return database.get_book(book_id)
+
+@app.post("/book")
+def add_book(book: Book_add) -> Book:
+    return database.add_book(**book)
+
+@app.delete("/book/{book_id}")
+def delete_book(book_id: int) -> bool:
+    return database.delete_book(book_id)
