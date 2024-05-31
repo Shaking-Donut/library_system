@@ -3,3 +3,5 @@ pydantic
 uvicorn
 psycopg
 python-dotenv
+pyjwt
+passlib[bcrypt]
