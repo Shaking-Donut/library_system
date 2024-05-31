@@ -18,17 +18,21 @@ CONNECTION_CONFIG = {
 
 DB_NAME = "library_system"
 
+
 def connection(dbname=None):
     try:
-        cnx = connect(**{key:value for (key, value) in CONNECTION_CONFIG.items() if key != "dbname"}, dbname=dbname if dbname else CONNECTION_CONFIG['dbname'])
+        cnx = connect(**{key: value for (key, value) in CONNECTION_CONFIG.items()
+                      if key != "dbname"}, dbname=dbname if dbname else CONNECTION_CONFIG['dbname'])
     except Error as e:
         print(f"Error: {e}")
         exit(1)
     else:
         return cnx
-    
+
+
 conn = connection()
 cur = conn.cursor()
+
 
 def database_init():
     # check if database already exists
@@ -41,7 +45,8 @@ def database_init():
         print("Error: Database already exists")
 
         # for development purposes, I will drop the database if it exists
-        cur.execute(sql.SQL("DROP DATABASE IF EXISTS {} WITH (FORCE);").format(sql.Identifier(DB_NAME)))
+        cur.execute(sql.SQL("DROP DATABASE IF EXISTS {} WITH (FORCE);").format(
+            sql.Identifier(DB_NAME)))
         print(f"Dev: Database {DB_NAME} dropped successfully")
         return
 
@@ -82,9 +87,15 @@ def database_init():
 
     # create a table for storing users
     cur.execute(sql.SQL("""CREATE TABLE users (
-                        id SERIAL PRIMARY KEY, 
-                        name VARCHAR(100), 
+                        id SERIAL PRIMARY KEY,
+                        username VARCHAR(100), 
                         email VARCHAR(100), 
+                        name VARCHAR(100), 
+                        surname VARCHAR(100),
+                        is_admin BOOLEAN DEFAULT FALSE,
+                        is_disabled BOOLEAN DEFAULT FALSE,
+                        date_created DATE,
+                        date_updated DATE,
                         password VARCHAR(100)
                         );"""))
     print(f"Table {DB_NAME}.users created successfully")
@@ -97,8 +108,9 @@ def database_init():
         for book in books:
             cur.execute(sql.SQL("""INSERT INTO books (title, author, year, isbn, branch, is_borrowed, date_borrowed, borrowed_by) 
                                 VALUES (%s, %s, %s, %s, %s, %s, %s, %s);"""),
-                                (book["title"], book["author"], book["year"], book["isbn"], book["branch"], book["is_borrowed"], book["date_borrowed"], book["borrowed_by"]))
-    print(f"Sample books data inserted successfully, inserted {len(books)} books")
+                        (book["title"], book["author"], book["year"], book["isbn"], book["branch"], book["is_borrowed"], book["date_borrowed"], book["borrowed_by"]))
+    print(f"Sample books data inserted successfully, inserted {
+          len(books)} books")
 
     # populate the table with sample branches data from branches.json
     print(f"Populating table {DB_NAME}.branches with sample data...")
@@ -107,8 +119,9 @@ def database_init():
         for branch in branches:
             cur.execute(sql.SQL("""INSERT INTO branches (name, location) 
                                 VALUES (%s, %s);"""),
-                                (branch["name"], branch["location"]))
-    print(f"Sample branch data inserted successfully, inserted {len(branches)} branches")
+                        (branch["name"], branch["location"]))
+    print(f"Sample branch data inserted successfully, inserted {
+          len(branches)} branches")
 
     # populate the table with sample users data from users.json
     print(f"Populating table {DB_NAME}.users with sample data...")
@@ -117,18 +130,25 @@ def database_init():
         for user in users:
             cur.execute(sql.SQL("""INSERT INTO users (name, email, password) 
                                 VALUES (%s, %s, %s);"""),
-                                (user["name"], user["email"], user["password"]))
-    print(f"Sample user data inserted successfully, inserted {len(users)} users")
+                        (user["name"], user["email"], user["password"]))
+    print(f"Sample user data inserted successfully, inserted {
+          len(users)} users")
+
+# Books operations -----------------------------------------
+
 
 def get_books() -> list[schemas.Book]:
     cur.execute(sql.SQL("SELECT * FROM books;"))
     books = cur.fetchall()
     return books
 
+
 def get_book(book_id) -> schemas.Book:
-    cur.execute(sql.SQL("SELECT * FROM books WHERE id = %s;"), sql.Identifier(book_id))
+    cur.execute(sql.SQL("SELECT * FROM books WHERE id = %s;"),
+                sql.Identifier(book_id))
     book = cur.fetchone()
     return book
+
 
 def add_book(book: schemas.Book_add) -> schemas.Book:
     title = book.title
@@ -141,7 +161,7 @@ def add_book(book: schemas.Book_add) -> schemas.Book:
     try:
         cur.execute(sql.SQL("""INSERT INTO books ("title", "author", "year", "isbn", "branch") 
                             VALUES (%s, %s, %s, %s, %s) RETURNING *;"""),
-                            (title, author, year, isbn, branch))
+                    (title, author, year, isbn, branch))
         book_added = cur.fetchone()
     except Error as e:
         print(f"Error adding book: {e}")
@@ -149,9 +169,11 @@ def add_book(book: schemas.Book_add) -> schemas.Book:
         print(f"Book added successfully: {book_added}")
         return book_added
 
+
 def delete_book(book_id) -> bool:
     try:
-        cur.execute(sql.SQL("DELETE FROM books WHERE id = %s;"), sql.Identifier(book_id))
+        cur.execute(sql.SQL("DELETE FROM books WHERE id = %s;"),
+                    sql.Identifier(book_id))
     except Error as e:
         print(f"Error deleting book: {e}")
         return False
@@ -159,25 +181,37 @@ def delete_book(book_id) -> bool:
         print(f"Book id={book_id} deleted successfully")
         return True
 
+
 def borrow_book(book_id, user_id) -> bool:
     try:
-        cur.execute(sql.SQL("UPDATE books SET is_borrowed = TRUE, borrowed_by = %s WHERE id = %s;"), (user_id, book_id))
+        cur.execute(sql.SQL(
+            "UPDATE books SET is_borrowed = TRUE, borrowed_by = %s WHERE id = %s;"), (user_id, book_id))
     except Error as e:
         print(f"Error borrowing book: {e}")
         return False
     else:
         print(f"Book id={book_id} borrowed by user={user_id} successfully")
         return True
-    
+
+
 def return_book(book_id):
     try:
-        cur.execute(sql.SQL("UPDATE books SET is_borrowed = FALSE, borrowed_by = NULL WHERE id = %s;"), sql.Identifier(book_id))
+        cur.execute(sql.SQL(
+            "UPDATE books SET is_borrowed = FALSE, borrowed_by = NULL WHERE id = %s;"), sql.Identifier(book_id))
     except Error as e:
         print(f"Error returning book: {e}")
         return False
     else:
         print(f"Book id={book_id} returned successfully")
         return True
-# database_init()
-# add_book("The Alchenist", "Pauloo Coelho", 1989, "978-0062315807", "Fittion")
-# conn.close()
+
+# Branches operations -----------------------------------------
+
+# Users operations -----------------------------------------
+
+
+def get_user(user_id) -> schemas.UserInDB:
+    cur.execute(sql.SQL("SELECT * FROM users WHERE id = %s;"),
+                sql.Identifier(user_id))
+    user = cur.fetchone()
+    return user

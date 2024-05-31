@@ -35,6 +35,10 @@ class User(BaseModel):
     date_updated: datetime
 
 
+class UserInDB(User):
+    hashed_password: str
+
+
 class Token(BaseModel):
     access_token: str
     token_type: str
@@ -43,7 +47,3 @@ class Token(BaseModel):
 class TokenData(BaseModel):
     user_id: int
     is_admin: bool
-
-
-class UserInDB(User):
-    hashed_password: str

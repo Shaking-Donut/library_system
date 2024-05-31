@@ -1,38 +1,222 @@
 [
     {
         "id": 1,
-        "name": "John Doe",
-        "email": "john.doe@email.com",
-        "password": "password"
+        "username": "C0orOtcTn0",
+        "email": "ZPaAqMxp@example.com",
+        "name": "David",
+        "surname": "Rodriguez",
+        "is_admin": false,
+        "is_disabled": false,
+        "date_created": "2023-06-16T14:07:25.043615",
+        "date_updated": "2023-10-30T01:07:50.043615"
     },
     {
         "id": 2,
-        "name": "Jane Doe",
-        "email": "jane.doe@email.com",
-        "password": "password"
+        "username": "EKDXJon56U",
+        "email": "obU3jdYv@example.com",
+        "name": "Grace",
+        "surname": "Jones",
+        "is_admin": true,
+        "is_disabled": true,
+        "date_created": "2023-07-09T08:09:35.043736",
+        "date_updated": "2023-10-20T05:08:44.043736"
     },
     {
         "id": 3,
-        "name": "John Smith",
-        "email": "john.smith@email.com",
-        "password": "password"
+        "username": "L4lKhvJn9w",
+        "email": "NLFeGg9O@example.com",
+        "name": "Hannah",
+        "surname": "Rodriguez",
+        "is_admin": true,
+        "is_disabled": true,
+        "date_created": "2023-10-27T10:48:11.043800",
+        "date_updated": "2024-04-24T15:55:01.043800"
     },
     {
         "id": 4,
-        "name": "Jane Smith",
-        "email": "jane.smith@email.com",
-        "password": "password"
+        "username": "HnDqN8Rqwb",
+        "email": "bxMytei8@example.com",
+        "name": "Eva",
+        "surname": "Garcia",
+        "is_admin": false,
+        "is_disabled": false,
+        "date_created": "2023-11-22T12:12:00.043855",
+        "date_updated": "2023-12-22T21:08:35.043855"
     },
     {
         "id": 5,
-        "name": "John Johnson",
-        "email": "john.johnson@email.com",
-        "password": "password"
+        "username": "nPhH2hEQfY",
+        "email": "FFGQNKEq@example.com",
+        "name": "Frank",
+        "surname": "Brown",
+        "is_admin": false,
+        "is_disabled": false,
+        "date_created": "2024-03-22T01:18:39.043916",
+        "date_updated": "2024-05-02T00:26:23.043916"
     },
     {
         "id": 6,
-        "name": "Jane Johnson",
-        "email": "jane.johnson@email.com",
-        "password": "password"
+        "username": "oxwjBncanx",
+        "email": "8wkkK8nd@example.com",
+        "name": "Grace",
+        "surname": "Miller",
+        "is_admin": true,
+        "is_disabled": false,
+        "date_created": "2023-09-10T00:16:15.043968",
+        "date_updated": "2023-09-13T21:48:20.043968"
+    },
+    {
+        "id": 7,
+        "username": "cyPBeNCst2",
+        "email": "0HTNhd38@example.com",
+        "name": "Jack",
+        "surname": "Miller",
+        "is_admin": false,
+        "is_disabled": false,
+        "date_created": "2023-08-24T18:17:59.044017",
+        "date_updated": "2023-11-24T17:58:44.044017"
+    },
+    {
+        "id": 8,
+        "username": "GM9zQLBkiN",
+        "email": "CU1mgd3V@example.com",
+        "name": "Alice",
+        "surname": "Davis",
+        "is_admin": false,
+        "is_disabled": true,
+        "date_created": "2023-09-11T18:25:32.044073",
+        "date_updated": "2023-10-19T09:35:12.044073"
+    },
+    {
+        "id": 9,
+        "username": "iU6u2DnbXY",
+        "email": "uSxGgxRH@example.com",
+        "name": "Frank",
+        "surname": "Rodriguez",
+        "is_admin": true,
+        "is_disabled": true,
+        "date_created": "2023-11-10T04:33:35.044118",
+        "date_updated": "2024-04-27T23:14:47.044118"
+    },
+    {
+        "id": 10,
+        "username": "F0O1h0EZGz",
+        "email": "JbLhvPzi@example.com",
+        "name": "Hannah",
+        "surname": "Smith",
+        "is_admin": false,
+        "is_disabled": false,
+        "date_created": "2023-09-17T14:54:05.044178",
+        "date_updated": "2024-03-09T04:58:32.044178"
+    },
+    {
+        "id": 11,
+        "username": "DhWtmRPllO",
+        "email": "TSIqvJMg@example.com",
+        "name": "David",
+        "surname": "Smith",
+        "is_admin": true,
+        "is_disabled": false,
+        "date_created": "2023-06-30T00:11:08.044201",
+        "date_updated": "2023-11-06T09:04:27.044201"
+    },
+    {
+        "id": 12,
+        "username": "AfscvyoD8Q",
+        "email": "mrTywpZe@example.com",
+        "name": "Charlie",
+        "surname": "Williams",
+        "is_admin": false,
+        "is_disabled": false,
+        "date_created": "2024-02-17T12:24:55.044228",
+        "date_updated": "2024-05-29T22:41:41.044228"
+    },
+    {
+        "id": 13,
+        "username": "ljDlIcSl1e",
+        "email": "ehavGtpg@example.com",
+        "name": "Eva",
+        "surname": "Martinez",
+        "is_admin": true,
+        "is_disabled": false,
+        "date_created": "2023-07-23T12:36:12.044271",
+        "date_updated": "2024-04-04T04:39:25.044271"
+    },
+    {
+        "id": 14,
+        "username": "Wl9PaGfrf1",
+        "email": "n5ZpNHdK@example.com",
+        "name": "Isaac",
+        "surname": "Rodriguez",
+        "is_admin": false,
+        "is_disabled": true,
+        "date_created": "2024-01-25T13:37:43.044317",
+        "date_updated": "2024-03-05T01:39:11.044317"
+    },
+    {
+        "id": 15,
+        "username": "z3cIpxuIAx",
+        "email": "GunST3fY@example.com",
+        "name": "Eva",
+        "surname": "Williams",
+        "is_admin": false,
+        "is_disabled": false,
+        "date_created": "2023-06-24T22:24:44.044344",
+        "date_updated": "2023-10-10T03:49:13.044344"
+    },
+    {
+        "id": 16,
+        "username": "UQB4YtAVKK",
+        "email": "sHe9ZcIa@example.com",
+        "name": "Eva",
+        "surname": "Miller",
+        "is_admin": true,
+        "is_disabled": false,
+        "date_created": "2023-10-18T11:10:06.044367",
+        "date_updated": "2024-03-27T23:21:45.044367"
+    },
+    {
+        "id": 17,
+        "username": "NQgAmMKznu",
+        "email": "KHD1laPO@example.com",
+        "name": "Charlie",
+        "surname": "Williams",
+        "is_admin": true,
+        "is_disabled": false,
+        "date_created": "2023-08-11T14:41:36.044389",
+        "date_updated": "2024-03-12T16:29:07.044389"
+    },
+    {
+        "id": 18,
+        "username": "htYmut6Dih",
+        "email": "AnqIgqji@example.com",
+        "name": "Eva",
+        "surname": "Jones",
+        "is_admin": true,
+        "is_disabled": false,
+        "date_created": "2024-02-02T22:14:00.044418",
+        "date_updated": "2024-02-25T15:53:07.044418"
+    },
+    {
+        "id": 19,
+        "username": "AwpVKpp8wP",
+        "email": "v3WpZIUf@example.com",
+        "name": "Frank",
+        "surname": "Rodriguez",
+        "is_admin": false,
+        "is_disabled": false,
+        "date_created": "2023-11-11T07:03:48.044443",
+        "date_updated": "2024-02-29T13:51:35.044443"
+    },
+    {
+        "id": 20,
+        "username": "zSFB3Rjvj7",
+        "email": "82vw9E6w@example.com",
+        "name": "Charlie",
+        "surname": "Rodriguez",
+        "is_admin": false,
+        "is_disabled": true,
+        "date_created": "2024-03-24T10:13:06.044466",
+        "date_updated": "2024-04-05T16:33:49.044466"
     }
 ]
