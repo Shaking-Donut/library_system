@@ -13,7 +13,7 @@ class Book(BaseModel):
     date_borrowed: datetime
     borrowed_by: str
 
-class Book_add(BaseModel):
+class BookAdd(BaseModel):
     title: str
     author: str
     year: int
