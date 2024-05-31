@@ -37,6 +37,6 @@ def add_book(book: Book_add) -> Book:
 def delete_book(book_id: int) -> bool:
     return database.delete_book(book_id)
 
-@app.put("/book/{book_id}/borrow/{user_id}/")
+@app.put("/book/{book_id}/borrow/")
 def borrow_book(book_id: int, user_id: int) -> bool:
     return database.borrow_book(book_id, user_id)
