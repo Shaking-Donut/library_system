@@ -1,5 +1,6 @@
 import json
 from psycopg import connect, Error, sql
+from psycopg.rows import dict_row
 from dotenv import dotenv_values
 from . import schemas
 
@@ -14,6 +15,7 @@ CONNECTION_CONFIG = {
     'port': dotenv_values('.env')['DB_PORT'],
     'host': dotenv_values('.env')['DB_HOST'],
     'autocommit': True,
+    'row_factory': dict_row
 }
 
 DB_NAME = "library_system"
