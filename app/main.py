@@ -1,46 +1,70 @@
-from typing import Union
+from typing import Union, Annotated
+from datetime import timedelta
 
-from fastapi import FastAPI
+from fastapi import FastAPI, Depends, HTTPException
+from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
+from dotenv import dotenv_values
+
 from . import database
-from .schemas import Book, Book_add
+from . import auth
+from .schemas import Book, BookAdd, Token
 
 app = FastAPI()
 
-@app.get("/")
-def read_root():
-    return {"Hello": "World"}
+
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
+
+JWT_EXPIRATION = int(dotenv_values(".env")["JWT_EXPIRATION"])
+
+# Auth endpoints -----------------------------------------
 
 
-@app.get("/items/{item_id}")
-def read_item(item_id: int, q: Union[str, None] = None):
-    return {"item_id": item_id, "q": q}
+@app.post("/token/", tags=["Auth"])
+async def login_to_access_token(
+    form_data: Annotated[OAuth2PasswordRequestForm, Depends()],
+) -> Token:
+    user = auth.authenticate_user(form_data.username, form_data.password)
+    if not user:
+        raise HTTPException(
+            status_code=400,
+            detail="Incorrect username or password",
+            headers={"WWW-Authenticate": "Bearer"},
+        )
+    access_token_expires = timedelta(seconds=JWT_EXPIRATION)
+    access_token = auth.create_access_token(
+        data={"sub": user.id, "username": user.username}, expires_delta=access_token_expires
+    )
+    return Token(access_token=access_token, token_type="bearer")
 
-@app.post("/login")
-def login_user(login: str, password: str):
-    return login and password
 
 # Book endpoints -----------------------------------------
 
-@app.get("/books/")
+
+@app.get("/books/", tags=["Books"])
 def get_books() -> list[Book]:
     return database.get_books()
 
-@app.get("/book/{book_id}/")
+
+@app.get("/book/{book_id}/", tags=["Books"])
 def get_book(book_id: int) -> Book:
     return database.get_book(book_id)
 
-@app.post("/book/")
-def add_book(book: Book_add) -> Book:
+
+@app.post("/book/", tags=["Books"])
+def add_book(book: BookAdd) -> Book:
     return database.add_book(**book)
 
-@app.delete("/book/{book_id}/")
+
+@app.delete("/book/{book_id}/", tags=["Books"])
 def delete_book(book_id: int) -> bool:
     return database.delete_book(book_id)
 
-@app.put("/book/{book_id}/borrow/")
+
+@app.put("/book/{book_id}/borrow/", tags=["Books"])
 def borrow_book(book_id: int, user_id: int) -> bool:
     return database.borrow_book(book_id, user_id)
 
-@app.put("/book/{book_id}/return/")
+
+@app.put("/book/{book_id}/return/", tags=["Books"])
 def return_book(book_id: int) -> bool:
     return database.return_book(book_id)
