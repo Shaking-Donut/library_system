@@ -214,6 +214,13 @@ def return_book(book_id):
         print(f"Book id={book_id} returned successfully")
         return True
 
+
+def get_user_books(user_id) -> list[schemas.Book]:
+    cur.execute(sql.SQL("SELECT * FROM books WHERE borrowed_by = %s;"),
+                (str(user_id),))
+    books = cur.fetchall()
+    return books
+
 # Branches operations -----------------------------------------
 
 # Users operations -----------------------------------------
