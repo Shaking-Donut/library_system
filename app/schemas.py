@@ -39,6 +39,14 @@ class UserInDB(User):
     password: str
 
 
+class UserAdd(BaseModel):
+    username: str
+    email: str
+    name: str
+    surname: str
+    password: str
+
+
 class Token(BaseModel):
     access_token: str
     token_type: str
