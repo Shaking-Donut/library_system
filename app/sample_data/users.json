@@ -238,5 +238,17 @@
         "date_created": "2023-09-04T15:52:49.697082",
         "date_updated": "2024-02-12T07:54:20.697082",
         "password": "$2b$12$KnpfywMc43yoK.p9/X0CF.uAovtHoZMk4zYGMPLMRZHwiT8whqL4m"
+    },
+    {
+        "id": 21,
+        "username": "user",
+        "email": "Mee3e6YH@example.com",
+        "name": "Daniel",
+        "surname": "Garcia",
+        "is_admin": true,
+        "is_disabled": false,
+        "date_created": "2023-09-04T15:52:49.697082",
+        "date_updated": "2024-02-12T07:54:20.697082",
+        "password": "$2b$12$KnpfywMc43yoK.p9/X0CF.uAovtHoZMk4zYGMPLMRZHwiT8whqL4m"
     }
 ]
