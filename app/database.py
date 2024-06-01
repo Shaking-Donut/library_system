@@ -32,7 +32,7 @@ def connection(dbname=None):
         return cnx
 
 
-conn = connection()
+conn = connection(DB_NAME)
 cur = conn.cursor()
 
 
