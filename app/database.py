@@ -152,7 +152,7 @@ def get_book(book_id) -> schemas.Book:
     return book
 
 
-def add_book(book: schemas.Book_add) -> schemas.Book:
+def add_book(book: schemas.BookAdd) -> schemas.Book:
     title = book.title
     author = book.author
     year = book.year
