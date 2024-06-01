@@ -12,14 +12,14 @@ from .schemas import Book, BookAdd, Token
 app = FastAPI()
 
 
-oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/login/")
 
 JWT_EXPIRATION = int(dotenv_values(".env")["JWT_EXPIRATION"])
 
 # Auth endpoints -----------------------------------------
 
 
-@app.post("/token/", tags=["Auth"])
+@app.post("/login/", tags=["Auth"])
 async def login_to_access_token(
     form_data: Annotated[OAuth2PasswordRequestForm, Depends()],
 ) -> Token:
@@ -32,7 +32,7 @@ async def login_to_access_token(
         )
     access_token_expires = timedelta(seconds=JWT_EXPIRATION)
     access_token = auth.create_access_token(
-        data={"sub": user.id, "username": user.username}, expires_delta=access_token_expires
+        data={"sub": user.id, "username": user.username, "is_admin": user.is_admin}, expires_delta=access_token_expires
     )
     return Token(access_token=access_token, token_type="bearer")
 
