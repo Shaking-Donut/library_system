@@ -11,8 +11,8 @@ class Book(BaseModel):
     isbn: str
     branch: str
     is_borrowed: bool = False
-    date_borrowed: datetime
-    borrowed_by: str
+    date_borrowed: datetime | None
+    borrowed_by: str | None
 
 
 class BookAdd(BaseModel):
@@ -45,5 +45,6 @@ class Token(BaseModel):
 
 
 class TokenData(BaseModel):
-    user_id: int
+    id: int
+    username: str
     is_admin: bool
