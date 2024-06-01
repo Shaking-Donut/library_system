@@ -41,6 +41,14 @@ def authenticate_user(username: str, password: str) -> bool | schemas.User:
     return transform_user(user)
 
 
+def register_user(user: schemas.UserAdd) -> schemas.User:
+    user.password = hash_password(user.password)
+    user: schemas.UserInDB = database.add_user(user)
+    if not user:
+        return False
+    return transform_user(user)
+
+
 def create_access_token(data: dict, expires_delta: timedelta | None = None) -> str:
     to_encode = data.copy()
     if expires_delta:
