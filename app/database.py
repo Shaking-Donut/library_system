@@ -152,9 +152,9 @@ def get_books() -> list[schemas.Book]:
     return books
 
 
-def get_book(book_id) -> schemas.Book:
+def get_book(book_id: int) -> schemas.Book:
     cur.execute(sql.SQL("SELECT * FROM books WHERE id = %s;"),
-                sql.Identifier(book_id))
+                (str(book_id),))
     book = cur.fetchone()
     return book
 
@@ -226,9 +226,9 @@ def get_user_books(user_id) -> list[schemas.Book]:
 # Users operations -----------------------------------------
 
 
-def get_user(user_id) -> schemas.UserInDB:
+def get_user(user_id: int) -> schemas.UserInDB:
     cur.execute(sql.SQL("SELECT * FROM users WHERE id = %s;"),
-                sql.Identifier(user_id))
+                (str(user_id),))
     user = cur.fetchone()
     return user
 
