@@ -78,8 +78,8 @@ def database_init(cur: Cursor, conn: Connection):
     # create a table for storing users
     cur.execute(sql.SQL("""CREATE TABLE users (
                         id SERIAL PRIMARY KEY,
-                        username VARCHAR(100), 
-                        email VARCHAR(100), 
+                        username VARCHAR(100) UNIQUE,
+                        email VARCHAR(100) UNIQUE, 
                         name VARCHAR(100), 
                         surname VARCHAR(100),
                         is_admin BOOLEAN DEFAULT FALSE,
@@ -276,7 +276,7 @@ def add_user(user: schemas.UserInDB) -> schemas.UserInDB:
     try:
         cur.execute(sql.SQL("""INSERT INTO users (username, email, name, surname, password) 
                             VALUES (%s, %s, %s, %s, %s) RETURNING *;"""),
-                    (username, email, name, surname, password))
+                    [username, email, name, surname, password])
         user_added = cur.fetchone()
     except Error as e:
         print(f"Error adding user: {e}")
