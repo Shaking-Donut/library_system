@@ -39,15 +39,16 @@ async def login_to_access_token(
 
 # Book endpoints -----------------------------------------
 
-@app.get("/books/me/", tags=["Books"])
-async def get_my_books(token: str = Depends(oauth2_scheme)) -> list[Book]:
-    user = auth.get_current_user(token)
-    return database.get_user_books(user.id)
-
 
 @app.get("/books/", tags=["Books"])
 def get_books() -> list[Book]:
     return database.get_books()
+
+
+@app.get("/books/me/", tags=["Books"])
+def get_my_books(token: str = Depends(oauth2_scheme)) -> list[Book]:
+    user = auth.get_current_user(token)
+    return database.get_user_books(user.id)
 
 
 @app.get("/book/{book_id}/", tags=["Books"])
