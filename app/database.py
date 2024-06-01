@@ -217,3 +217,17 @@ def get_user(user_id) -> schemas.UserInDB:
                 sql.Identifier(user_id))
     user = cur.fetchone()
     return user
+
+
+def get_user_by_username(username) -> schemas.UserInDB:
+    cur.execute(sql.SQL("SELECT * FROM users WHERE username = %s;"),
+                (username,))
+    user = cur.fetchone()
+    return user
+
+
+def is_user_admin(user_id) -> bool:
+    cur.execute(sql.SQL("SELECT is_admin FROM users WHERE id = %s;"),
+                sql.Identifier(user_id))
+    is_admin = cur.fetchone()
+    return is_admin
