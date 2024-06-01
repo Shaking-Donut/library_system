@@ -1,7 +1,10 @@
 import json
+
 from psycopg import Connection, Cursor, connect, Error, sql
+from datetime import datetime
 from psycopg.rows import dict_row
 from dotenv import dotenv_values
+
 from . import schemas
 
 if __name__ == "__main__":
@@ -81,11 +84,26 @@ def database_init(cur: Cursor, conn: Connection):
                         surname VARCHAR(100),
                         is_admin BOOLEAN DEFAULT FALSE,
                         is_disabled BOOLEAN DEFAULT FALSE,
-                        date_created DATE,
-                        date_updated DATE,
+                        date_created TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                        date_updated TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                         password VARCHAR(100)
                         );"""))
     print(f"Table {DB_NAME}.users created successfully")
+
+    # create a trigger for updating date_updated column in users table
+    print(f"Creating trigger for updating date_updated in {DB_NAME}.users...")
+    cur.execute(sql.SQL("""CREATE OR REPLACE FUNCTION update_date_updated_column()
+                        RETURNS TRIGGER AS $$
+                        BEGIN
+                            NEW.date_updated = NOW();
+                            RETURN NEW;
+                        END;
+                        $$ language 'plpgsql';"""))
+    cur.execute(sql.SQL("""CREATE TRIGGER update_date_updated_trigger
+                        BEFORE UPDATE ON users
+                        FOR EACH ROW
+                        EXECUTE FUNCTION update_date_updated_column();"""))
+    print(f"Trigger created successfully")
 
     # populate the table with sample books data from books.json
     print(f"Populating table {DB_NAME}.books with sample data...")
@@ -115,9 +133,9 @@ def database_init(cur: Cursor, conn: Connection):
     with open("/workspaces/library_system/app/sample_data/users.json", "r") as f:
         users = json.load(f)
         for user in users:
-            cur.execute(sql.SQL("""INSERT INTO users (username, email, name, surname, is_admin, is_disabled, date_created, date_updated, password) 
-                                VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s);"""),
-                        (user["username"], user["email"], user["name"], user["surname"], user["is_admin"], user["is_disabled"], user["date_created"], user["date_updated"], user["password"]))
+            cur.execute(sql.SQL("""INSERT INTO users (username, email, name, surname, is_admin, is_disabled, password) 
+                                VALUES (%s, %s, %s, %s, %s, %s, %s);"""),
+                        (user["username"], user["email"], user["name"], user["surname"], user["is_admin"], user["is_disabled"], user["password"]))
     print(f"Sample user data inserted successfully, inserted {
           len(users)} users")
 
@@ -245,3 +263,23 @@ def is_user_admin(user_id) -> bool:
                 sql.Identifier(user_id))
     is_admin = cur.fetchone()
     return is_admin
+
+
+def add_user(user: schemas.UserInDB) -> schemas.UserInDB:
+    username = user.username
+    email = user.email
+    name = user.name
+    surname = user.surname
+    password = user.password
+    user_added = ""
+
+    try:
+        cur.execute(sql.SQL("""INSERT INTO users (username, email, name, surname, password) 
+                            VALUES (%s, %s, %s, %s, %s) RETURNING *;"""),
+                    (username, email, name, surname, password))
+        user_added = cur.fetchone()
+    except Error as e:
+        print(f"Error adding user: {e}")
+    else:
+        print(f"User added successfully: {user_added}")
+        return user_added
