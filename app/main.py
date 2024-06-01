@@ -7,7 +7,7 @@ from dotenv import dotenv_values
 
 from . import database
 from . import auth
-from .schemas import Book, BookAdd, Token
+from .schemas import Book, BookAdd, Token, UserAdd
 
 app = FastAPI()
 
@@ -36,6 +36,18 @@ async def login_to_access_token(
     )
     return Token(access_token=access_token, token_type="bearer")
 
+
+@app.post("/register/", tags=["Auth"])
+def register_user(user: UserAdd) -> Token:
+    user = auth.register_user(user)
+    if not user:
+        raise HTTPException(status_code=400, detail="User already exists")
+
+    access_token_expires = timedelta(seconds=JWT_EXPIRATION)
+    access_token = auth.create_access_token(
+        data={"sub": user.id, "username": user.username, "is_admin": user.is_admin}, expires_delta=access_token_expires
+    )
+    return Token(access_token=access_token, token_type="bearer")
 
 # Book endpoints -----------------------------------------
 
