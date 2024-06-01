@@ -1,5 +1,5 @@
 import json
-from psycopg import connect, Error, sql
+from psycopg import Connection, Cursor, connect, Error, sql
 from psycopg.rows import dict_row
 from dotenv import dotenv_values
 from . import schemas
@@ -18,30 +18,15 @@ CONNECTION_CONFIG = {
     'row_factory': dict_row
 }
 
-DB_NAME = "library_system"
+DB_NAME = dotenv_values('.env')['DB_NAME']
+DEFAULT_DB_NAME = "postgres"
 
 
-def connection(dbname=None):
-    try:
-        cnx = connect(**{key: value for (key, value) in CONNECTION_CONFIG.items()
-                      if key != "dbname"}, dbname=dbname if dbname else CONNECTION_CONFIG['dbname'])
-    except Error as e:
-        print(f"Error: {e}")
-        exit(1)
-    else:
-        return cnx
-
-
-conn = connection(DB_NAME)
-cur = conn.cursor()
-
-
-def database_init():
+def database_init(cur: Cursor, conn: Connection):
     # check if database already exists
-    global cur, conn
     cur.execute("SELECT datname FROM pg_database")
     db_list = cur.fetchall()
-    db_list = [db[0] for db in db_list]
+    db_list = [db["datname"] for db in db_list]
 
     if DB_NAME in db_list:
         print("Error: Database already exists")
@@ -135,6 +120,28 @@ def database_init():
                         (user["username"], user["email"], user["name"], user["surname"], user["is_admin"], user["is_disabled"], user["date_created"], user["date_updated"], user["password"]))
     print(f"Sample user data inserted successfully, inserted {
           len(users)} users")
+
+
+def connection(dbname=None):
+    try:
+        cnx = connect(**{key: value for (key, value) in CONNECTION_CONFIG.items()
+                      if key != "dbname"}, dbname=dbname if dbname else CONNECTION_CONFIG['dbname'])
+    except Error as e:
+        print(f"Error: {e}")
+        print(f"Connecting to default database {DEFAULT_DB_NAME}...")
+        cnx = connection(DEFAULT_DB_NAME)
+        print(f"Connection to {DEFAULT_DB_NAME} successful")
+        print(f"Initializing database {DB_NAME}...")
+        database_init(conn=cnx, cur=cnx.cursor())
+        print(f"Database {DB_NAME} initialized successfully")
+        cnx = connection(DB_NAME)
+    finally:
+        return cnx
+
+
+conn = connection()
+cur = conn.cursor()
+
 
 # Books operations -----------------------------------------
 
