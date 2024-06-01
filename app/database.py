@@ -130,9 +130,9 @@ def database_init():
     with open("/workspaces/library_system/app/sample_data/users.json", "r") as f:
         users = json.load(f)
         for user in users:
-            cur.execute(sql.SQL("""INSERT INTO users (name, email, password) 
-                                VALUES (%s, %s, %s);"""),
-                        (user["name"], user["email"], user["password"]))
+            cur.execute(sql.SQL("""INSERT INTO users (username, email, name, surname, is_admin, is_disabled, date_created, date_updated, password) 
+                                VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s);"""),
+                        (user["username"], user["email"], user["name"], user["surname"], user["is_admin"], user["is_disabled"], user["date_created"], user["date_updated"], user["password"]))
     print(f"Sample user data inserted successfully, inserted {
           len(users)} users")
 
