@@ -170,10 +170,12 @@ def get_books() -> list[schemas.Book]:
     return books
 
 
-def get_book(book_id: int) -> schemas.Book:
+def get_book(book_id: int) -> schemas.Book | None:
     cur.execute(sql.SQL("SELECT * FROM books WHERE id = %s;"),
                 (str(book_id),))
     book = cur.fetchone()
+    if not book:
+        return None
     return book
 
 
@@ -200,7 +202,7 @@ def add_book(book: schemas.BookAdd) -> schemas.Book:
 def delete_book(book_id) -> bool:
     try:
         cur.execute(sql.SQL("DELETE FROM books WHERE id = %s;"),
-                    sql.Identifier(book_id))
+                    (str(book_id),))
     except Error as e:
         print(f"Error deleting book: {e}")
         return False
@@ -224,7 +226,7 @@ def borrow_book(book_id, user_id) -> bool:
 def return_book(book_id):
     try:
         cur.execute(sql.SQL(
-            "UPDATE books SET is_borrowed = FALSE, borrowed_by = NULL WHERE id = %s;"), sql.Identifier(book_id))
+            "UPDATE books SET is_borrowed = FALSE, borrowed_by = NULL WHERE id = %s;"), (str(book_id),))
     except Error as e:
         print(f"Error returning book: {e}")
         return False
@@ -265,7 +267,7 @@ def is_user_admin(user_id) -> bool:
     return is_admin
 
 
-def add_user(user: schemas.UserInDB) -> schemas.UserInDB:
+def add_user(user: schemas.UserAdd) -> schemas.UserInDB:
     username = user.username
     email = user.email
     name = user.name
@@ -280,6 +282,7 @@ def add_user(user: schemas.UserInDB) -> schemas.UserInDB:
         user_added = cur.fetchone()
     except Error as e:
         print(f"Error adding user: {e}")
+        return False
     else:
         print(f"User added successfully: {user_added}")
         return user_added
