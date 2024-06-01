@@ -65,24 +65,45 @@ def get_my_books(token: str = Depends(oauth2_scheme)) -> list[Book]:
 
 @app.get("/book/{book_id}/", tags=["Books"])
 def get_book(book_id: int) -> Book:
-    return database.get_book(book_id)
+    book = database.get_book(book_id)
+    if not book:
+        raise HTTPException(status_code=404, detail="Book not found")
+    return book
 
 
 @app.post("/book/", tags=["Books"])
-def add_book(book: BookAdd) -> Book:
+def add_book(book: BookAdd, token: str = Depends(oauth2_scheme)) -> Book:
+    user = auth.get_current_user(token)
+    if not user.is_admin:
+        raise HTTPException(
+            status_code=401, detail="You are not an admin", headers={"WWW-Authenticate": "Bearer"}
+        )
     return database.add_book(**book)
 
 
 @app.delete("/book/{book_id}/", tags=["Books"])
-def delete_book(book_id: int) -> bool:
+def delete_book(book_id: int, token: str = Depends(oauth2_scheme)) -> bool:
+    user = auth.get_current_user(token)
+    if not user.is_admin:
+        raise HTTPException(
+            status_code=401, detail="You are not an admin", headers={"WWW-Authenticate": "Bearer"}
+        )
     return database.delete_book(book_id)
 
 
 @app.put("/book/{book_id}/borrow/", tags=["Books"])
-def borrow_book(book_id: int, user_id: int) -> bool:
+def borrow_book(book_id: int, token: str = Depends(oauth2_scheme)) -> bool:
+    user = auth.get_current_user(token)
+    user_id = user.id
+    book = database.get_book(book_id)
+    if not book:
+        raise HTTPException(status_code=404, detail="Book not found")
     return database.borrow_book(book_id, user_id)
 
 
 @app.put("/book/{book_id}/return/", tags=["Books"])
 def return_book(book_id: int) -> bool:
+    book = database.get_book(book_id)
+    if not book:
+        raise HTTPException(status_code=404, detail="Book not found")
     return database.return_book(book_id)
