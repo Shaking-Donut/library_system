@@ -86,7 +86,7 @@ def delete_book(book_id: int, token: str = Depends(oauth2_scheme)) -> bool:
     user = auth.get_current_user(token)
     if not user.is_admin:
         raise HTTPException(
-            status_code=401, detail="You are not an admin", headers={"WWW-Authenticate": "Bearer"}
+            status_code=403, detail="You are not an admin", headers={"WWW-Authenticate": "Bearer"}
         )
     return database.delete_book(book_id)
 
