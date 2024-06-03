@@ -87,5 +87,9 @@ def get_current_user(token: str) -> schemas.User:
     user = database.get_user(token_data.id)
     if user is None:
         raise credentials_exception
+    if user['is_disabled']:
+        raise HTTPException(
+            status_code=status.HTTP_418_IM_A_TEAPOT, detail="User is disabled"
+        )
 
     return transform_user(user)
