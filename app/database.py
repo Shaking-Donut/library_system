@@ -8,7 +8,7 @@ from dotenv import dotenv_values
 from . import schemas
 
 if __name__ == "__main__":
-    print("This file is not meant to be run directly")
+    print(f"{__name__}: This file is not meant to be run directly")
     exit(1)
 
 CONNECTION_CONFIG = {
@@ -108,7 +108,7 @@ def database_init(cur: Cursor, conn: Connection):
     # populate the table with sample books data from books.json
     print(f"Populating table {DB_NAME}.books with sample data...")
 
-    with open("/workspaces/library_system/app/sample_data/books.json", "r") as f:
+    with open("/code/app/sample_data/books.json", "r") as f:
         books = json.load(f)
         for book in books:
             cur.execute(sql.SQL("""INSERT INTO books (title, author, year, isbn, branch, is_borrowed, date_borrowed, borrowed_by) 
@@ -119,7 +119,7 @@ def database_init(cur: Cursor, conn: Connection):
 
     # populate the table with sample branches data from branches.json
     print(f"Populating table {DB_NAME}.branches with sample data...")
-    with open("/workspaces/library_system/app/sample_data/branches.json", "r") as f:
+    with open("/code/app/sample_data/branches.json", "r") as f:
         branches = json.load(f)
         for branch in branches:
             cur.execute(sql.SQL("""INSERT INTO branches (name, location) 
@@ -130,7 +130,7 @@ def database_init(cur: Cursor, conn: Connection):
 
     # populate the table with sample users data from users.json
     print(f"Populating table {DB_NAME}.users with sample data...")
-    with open("/workspaces/library_system/app/sample_data/users.json", "r") as f:
+    with open("/code/app/sample_data/users.json", "r") as f:
         users = json.load(f)
         for user in users:
             cur.execute(sql.SQL("""INSERT INTO users (username, email, name, surname, is_admin, is_disabled, password) 
@@ -147,12 +147,13 @@ def connection(dbname=None):
     except Error as e:
         print(f"Error: {e}")
         print(f"Connecting to default database {DEFAULT_DB_NAME}...")
-        cnx = connection(DEFAULT_DB_NAME)
+        cnx = connect(**{key: value for (key, value) in CONNECTION_CONFIG.items() if key != "dbname"}, dbname=DEFAULT_DB_NAME)
         print(f"Connection to {DEFAULT_DB_NAME} successful")
         print(f"Initializing database {DB_NAME}...")
         database_init(conn=cnx, cur=cnx.cursor())
         print(f"Database {DB_NAME} initialized successfully")
-        cnx = connection(DB_NAME)
+        cnx = connect(**{key: value for (key, value) in CONNECTION_CONFIG.items()
+                      if key != "dbname"}, dbname=dbname if dbname else CONNECTION_CONFIG['dbname'])
     finally:
         return cnx
 
