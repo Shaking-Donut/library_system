@@ -17,6 +17,10 @@ oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/login/")
 JWT_EXPIRATION = int(dotenv_values(".env")["JWT_EXPIRATION"])
 
 
+@app.get("/", tags=["Root"])
+def read_root() -> dict[str, str]:
+    return {"message": "Hello World, the API is working!"}
+
 # Auth endpoints -----------------------------------------
 
 
