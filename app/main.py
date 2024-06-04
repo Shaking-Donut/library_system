@@ -7,7 +7,7 @@ from dotenv import dotenv_values
 
 from . import database
 from . import auth
-from .schemas import Book, BookAdd, Token, UserAdd, Branch, BranchAdd
+from .schemas import Book, BookAdd, Token, User, UserAdd, Branch, BranchAdd
 
 app = FastAPI()
 
@@ -53,6 +53,11 @@ def register_user(user: UserAdd) -> Token:
         data={"sub": user.id, "username": user.username, "is_admin": user.is_admin}, expires_delta=access_token_expires
     )
     return Token(access_token=access_token, token_type="bearer")
+
+
+@app.get("/current_user/", tags=["Auth"])
+def get_current_user(token: str = Depends(oauth2_scheme)) -> User:
+    return auth.get_current_user(token)
 
 # Book endpoints -----------------------------------------
 
