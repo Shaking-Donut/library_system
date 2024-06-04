@@ -13,5 +13,15 @@
         "id": 3,
         "name": "Biblioteka Pedagogiczna w Krakowie",
         "location": "ul. Podchorążych 2, 30-084 Kraków"
+    },
+    {
+        "id": 4,
+        "name": "Biblioteka Uniwersytecka w Krakowie",
+        "location": "ul. Jagiellońska 1, 31-007 Kraków"
+    },
+    {
+        "id": 5,
+        "name": "Biblioteka Wojewódzka w Krakowie",
+        "location": "ul. Rajska 1, 30-150 Kraków"
     }
 ]
