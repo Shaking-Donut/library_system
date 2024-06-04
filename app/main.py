@@ -7,7 +7,7 @@ from dotenv import dotenv_values
 
 from . import database
 from . import auth
-from .schemas import Book, BookAdd, Token, UserAdd
+from .schemas import Book, BookAdd, Token, UserAdd, Branch, BranchAdd
 
 app = FastAPI()
 
@@ -54,8 +54,8 @@ def register_user(user: UserAdd) -> Token:
 
 
 @app.get("/books/", tags=["Books"])
-def get_books() -> list[Book]:
-    return database.get_books()
+def get_books(branch_id: str | None = None) -> list[Book]:
+    return database.get_books(branch_id)
 
 
 @app.get("/books/me/", tags=["Books"])
@@ -108,3 +108,38 @@ def return_book(book_id: int) -> bool:
     if not book:
         raise HTTPException(status_code=404, detail="Book not found")
     return database.return_book(book_id)
+
+# Branch endpoints -----------------------------------------
+
+
+@app.get("/branches/", tags=["Branches"])
+def get_branches() -> list[Branch]:
+    return database.get_branches()
+
+
+@app.get("/branch/{branch_id}/", tags=["Branches"])
+def get_branch(branch_id: int) -> Branch:
+    branch = database.get_branch(branch_id)
+    if not branch:
+        raise HTTPException(status_code=404, detail="Branch not found")
+    return branch
+
+
+@app.post("/branch/", tags=["Branches"])
+def add_branch(branch: BranchAdd, token: str = Depends(oauth2_scheme)) -> Branch:
+    user = auth.get_current_user(token)
+    if not user.is_admin:
+        raise HTTPException(
+            status_code=403, detail="You are not an admin", headers={"WWW-Authenticate": "Bearer"}
+        )
+    return database.add_branch(branch)
+
+
+@app.delete("/branch/{branch_id}/", tags=["Branches"])
+def delete_branch(branch_id: int, token: str = Depends(oauth2_scheme)) -> bool:
+    user = auth.get_current_user(token)
+    if not user.is_admin:
+        raise HTTPException(
+            status_code=403, detail="You are not an admin", headers={"WWW-Authenticate": "Bearer"}
+        )
+    return database.delete_branch(branch_id)

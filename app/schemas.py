@@ -56,3 +56,14 @@ class TokenData(BaseModel):
     id: int
     username: str
     is_admin: bool
+
+
+class Branch(BaseModel):
+    id: int
+    name: str
+    location: str
+
+
+class BranchAdd(BaseModel):
+    name: str
+    location: str

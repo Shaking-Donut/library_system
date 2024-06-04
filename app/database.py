@@ -25,7 +25,7 @@ DB_NAME = dotenv_values('.env')['DB_NAME']
 DEFAULT_DB_NAME = "postgres"
 
 
-def database_init(cur: Cursor, conn: Connection):
+def database_init(cur: Cursor, conn: Connection) -> None:
     # check if database already exists
     cur.execute("SELECT datname FROM pg_database")
     db_list = cur.fetchall()
@@ -171,8 +171,12 @@ cur = conn.cursor()
 # Books operations -----------------------------------------
 
 
-def get_books() -> list[schemas.Book]:
-    cur.execute(sql.SQL("SELECT * FROM books;"))
+def get_books(branch_id: str | None = None) -> list[schemas.Book]:
+    if branch_id:
+        cur.execute(sql.SQL("SELECT * FROM books WHERE branch = %s;"),
+                    (branch_id,))
+    else:
+        cur.execute(sql.SQL("SELECT * FROM books;"))
     books = cur.fetchall()
     return books
 
@@ -230,7 +234,7 @@ def borrow_book(book_id, user_id) -> bool:
         return True
 
 
-def return_book(book_id):
+def return_book(book_id) -> bool:
     try:
         cur.execute(sql.SQL(
             "UPDATE books SET is_borrowed = FALSE, borrowed_by = NULL WHERE id = %s;"), (str(book_id),))
@@ -249,6 +253,48 @@ def get_user_books(user_id) -> list[schemas.Book]:
     return books
 
 # Branches operations -----------------------------------------
+
+
+def get_branches() -> list[schemas.Branch]:
+    cur.execute(sql.SQL("SELECT * FROM branches;"))
+    branches = cur.fetchall()
+    return branches
+
+
+def get_branch(branch_id: int) -> schemas.Branch:
+    cur.execute(sql.SQL("SELECT * FROM branches WHERE id = %s;"),
+                (str(branch_id),))
+    branch = cur.fetchone()
+    return branch
+
+
+def add_branch(branch: schemas.BranchAdd) -> schemas.Branch:
+    name = branch.name
+    location = branch.location
+    branch_added = ""
+
+    try:
+        cur.execute(sql.SQL("INSERT INTO branches (name, location) VALUES (%s, %s) RETURNING *;"),
+                    (name, location))
+        branch_added = cur.fetchone()
+    except Error as e:
+        print(f"Error adding branch: {e}")
+        return False
+    else:
+        print(f"Branch added successfully: {branch_added}")
+        return branch_added
+
+
+def delete_branch(branch_id) -> bool:
+    try:
+        cur.execute(sql.SQL("DELETE FROM branches WHERE id = %s;"),
+                    (str(branch_id),))
+    except Error as e:
+        print(f"Error deleting branch: {e}")
+        return False
+    else:
+        print(f"Branch id={branch_id} deleted successfully")
+        return True
 
 # Users operations -----------------------------------------
 
