@@ -28,7 +28,7 @@ JWT_EXPIRATION=3600
 JWT_ALGORITHM=HS256
 ```
 3. Run the command below in the root directory of the project
-```shell
+```bash
 docker-compose up --build
 ``` 
 4. API should be available at [http://localhost:80](http://localhost:80)
