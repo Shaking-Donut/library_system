@@ -60,10 +60,10 @@ def database_init(cur: Cursor, conn: Connection) -> None:
                         "author" VARCHAR(100), 
                         "year" INTEGER, 
                         "isbn" VARCHAR(17),
-                        "branch" VARCHAR(100),
+                        "branch" INTEGER,
                         "is_borrowed" BOOLEAN DEFAULT FALSE,
                         "date_borrowed" DATE,
-                        "borrowed_by" VARCHAR(100)
+                        "borrowed_by" INTEGER DEFAULT NULL
                         );"""))
     print(f"Table {DB_NAME}.books created successfully")
 
@@ -105,17 +105,14 @@ def database_init(cur: Cursor, conn: Connection) -> None:
                         EXECUTE FUNCTION update_date_updated_column();"""))
     print(f"Trigger created successfully")
 
-    # populate the table with sample books data from books.json
-    print(f"Populating table {DB_NAME}.books with sample data...")
-
-    with open("/code/app/sample_data/books.json", "r") as f:
-        books = json.load(f)
-        for book in books:
-            cur.execute(sql.SQL("""INSERT INTO books (title, author, year, isbn, branch, is_borrowed, date_borrowed, borrowed_by) 
-                                VALUES (%s, %s, %s, %s, %s, %s, %s, %s);"""),
-                        (book["title"], book["author"], book["year"], book["isbn"], book["branch"], book["is_borrowed"], book["date_borrowed"], book["borrowed_by"]))
-    print(f"Sample books data inserted successfully, inserted {
-          len(books)} books")
+    # create relations books - branches and book - users
+    print(f"""Creating relations between tables {
+          DB_NAME}.books - {DB_NAME}.branches and {DB_NAME}.books - {DB_NAME}.users...""")
+    cur.execute(sql.SQL(
+        "ALTER TABLE books ADD CONSTRAINT fk_branch FOREIGN KEY(branch) REFERENCES branches(id);"))
+    cur.execute(sql.SQL(
+        "ALTER TABLE books ADD CONSTRAINT fk_borrowed_by FOREIGN KEY(borrowed_by) REFERENCES users(id);"))
+    print(f"Relations created successfully")
 
     # populate the table with sample branches data from branches.json
     print(f"Populating table {DB_NAME}.branches with sample data...")
@@ -138,6 +135,19 @@ def database_init(cur: Cursor, conn: Connection) -> None:
                         (user["username"], user["email"], user["name"], user["surname"], user["is_admin"], user["is_disabled"], user["password"]))
     print(f"Sample user data inserted successfully, inserted {
           len(users)} users")
+
+    # populate the table with sample books data from books.json
+    print(f"Populating table {DB_NAME}.books with sample data...")
+    with open("/code/app/sample_data/books.json", "r") as f:
+        books = json.load(f)
+        for book in books:
+            cur.execute(sql.SQL("""INSERT INTO books (title, author, year, isbn, branch, is_borrowed, date_borrowed, borrowed_by) 
+                                VALUES (%s, %s, %s, %s, %s, %s, %s, %s);"""),
+                        (book["title"], book["author"], book["year"], book["isbn"], book["branch"], book["is_borrowed"], book["date_borrowed"], book["borrowed_by"]))
+    print(f"Sample books data inserted successfully, inserted {
+          len(books)} books")
+
+    cur.execute(sql.SQL("CREATE EXTENSION IF NOT EXISTS pg_trgm;"))
 
 
 def connection(dbname=None):
@@ -171,8 +181,14 @@ cur = conn.cursor()
 # Books operations -----------------------------------------
 
 
-def get_books(branch_id: str | None = None) -> list[schemas.Book]:
-    if branch_id:
+def get_books(branch_id: str | None = None, search_query: str | None = None) -> list[schemas.Book]:
+    if branch_id and search_query:
+        cur.execute(sql.SQL(
+            "SELECT * FROM books WHERE branch = %s AND (title %% %s OR author %% %s);"), (branch_id, search_query, search_query))
+    elif search_query:
+        cur.execute(sql.SQL(
+            "SELECT * FROM books WHERE title %% %s OR author %% %s;"), (search_query, search_query))
+    elif branch_id:
         cur.execute(sql.SQL("SELECT * FROM books WHERE branch = %s;"),
                     (branch_id,))
     else:

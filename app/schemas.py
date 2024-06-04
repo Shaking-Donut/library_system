@@ -9,10 +9,10 @@ class Book(BaseModel):
     author: str
     year: int
     isbn: str
-    branch: str
+    branch: int
     is_borrowed: bool = False
     date_borrowed: datetime | None
-    borrowed_by: str | None
+    borrowed_by: int | None
 
 
 class BookAdd(BaseModel):
@@ -20,7 +20,7 @@ class BookAdd(BaseModel):
     author: str
     year: int
     isbn: str
-    branch: str
+    branch: int
 
 
 class User(BaseModel):

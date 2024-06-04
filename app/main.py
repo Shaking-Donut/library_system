@@ -63,8 +63,8 @@ def get_current_user(token: str = Depends(oauth2_scheme)) -> User:
 
 
 @app.get("/books/", tags=["Books"])
-def get_books(branch_id: str | None = None) -> list[Book]:
-    return database.get_books(branch_id)
+def get_books(branch_id: str | None = None, search_query: str | None = None) -> list[Book]:
+    return database.get_books(branch_id, search_query=search_query)
 
 
 @app.get("/books/me/", tags=["Books"])
