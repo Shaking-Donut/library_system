@@ -16,6 +16,7 @@ oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/login/")
 
 JWT_EXPIRATION = int(dotenv_values(".env")["JWT_EXPIRATION"])
 
+
 # Auth endpoints -----------------------------------------
 
 
