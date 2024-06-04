@@ -147,13 +147,19 @@ def connection(dbname=None):
     except Error as e:
         print(f"Error: {e}")
         print(f"Connecting to default database {DEFAULT_DB_NAME}...")
-        cnx = connect(**{key: value for (key, value) in CONNECTION_CONFIG.items() if key != "dbname"}, dbname=DEFAULT_DB_NAME)
-        print(f"Connection to {DEFAULT_DB_NAME} successful")
-        print(f"Initializing database {DB_NAME}...")
-        database_init(conn=cnx, cur=cnx.cursor())
-        print(f"Database {DB_NAME} initialized successfully")
-        cnx = connect(**{key: value for (key, value) in CONNECTION_CONFIG.items()
-                      if key != "dbname"}, dbname=dbname if dbname else CONNECTION_CONFIG['dbname'])
+        try:
+            cnx = connect(**{key: value for (key, value) in CONNECTION_CONFIG.items()
+                          if key != "dbname"}, dbname=DEFAULT_DB_NAME)
+        except Error as e:
+            print(f"Error: {e}")
+            return None
+        else:
+            print(f"Connection to {DEFAULT_DB_NAME} successful")
+            print(f"Initializing database {DB_NAME}...")
+            database_init(conn=cnx, cur=cnx.cursor())
+            print(f"Database {DB_NAME} initialized successfully")
+            cnx = connect(**{key: value for (key, value) in CONNECTION_CONFIG.items()
+                             if key != "dbname"}, dbname=dbname if dbname else CONNECTION_CONFIG['dbname'])
     finally:
         return cnx
 
