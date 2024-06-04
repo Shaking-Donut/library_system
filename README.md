@@ -27,7 +27,10 @@ JWT_SECRET=c0f9236446682cbebc5ec8683881259cddf8c52dd987fa5c4f05a144ea7fd3ea
 JWT_EXPIRATION=3600
 JWT_ALGORITHM=HS256
 ```
-3. Run `docker-compose up --build` in the root directory of the project
+3. Run the command below in the root directory of the project
+```shell
+docker-compose up --build
+``` 
 4. API should be available at [http://localhost:80](http://localhost:80)
 
 
