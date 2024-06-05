@@ -298,5 +298,895 @@
         "date_borrowed": null,
         "borrowed_by": null,
         "isbn": "9780156031820"
+    },
+    {
+        "title": "To Kill a Mockingbird",
+        "author": "Harper Lee",
+        "year": 1960,
+        "isbn": "9780061120084",
+        "branch": 1,
+        "is_borrowed": false,
+        "date_borrowed": null,
+        "borrowed_by": null
+    },
+    {
+        "title": "1984",
+        "author": "George Orwell",
+        "year": 1949,
+        "isbn": "9780451524935",
+        "branch": 1,
+        "is_borrowed": true,
+        "date_borrowed": "2024-05-15T00:00:00",
+        "borrowed_by": 10
+    },
+    {
+        "title": "The Great Gatsby",
+        "author": "F. Scott Fitzgerald",
+        "year": 1925,
+        "isbn": "9780743273565",
+        "branch": 2,
+        "is_borrowed": false,
+        "date_borrowed": null,
+        "borrowed_by": null
+    },
+    {
+        "title": "Pride and Prejudice",
+        "author": "Jane Austen",
+        "year": 1813,
+        "isbn": "9781503290563",
+        "branch": 3,
+        "is_borrowed": true,
+        "date_borrowed": "2024-04-10T00:00:00",
+        "borrowed_by": 5
+    },
+    {
+        "title": "The Catcher in the Rye",
+        "author": "J.D. Salinger",
+        "year": 1951,
+        "isbn": "9780316769488",
+        "branch": 4,
+        "is_borrowed": false,
+        "date_borrowed": null,
+        "borrowed_by": null
+    },
+    {
+        "title": "The Hobbit",
+        "author": "J.R.R. Tolkien",
+        "year": 1937,
+        "isbn": "9780547928227",
+        "branch": 5,
+        "is_borrowed": false,
+        "date_borrowed": null,
+        "borrowed_by": null
+    },
+    {
+        "title": "Fahrenheit 451",
+        "author": "Ray Bradbury",
+        "year": 1953,
+        "isbn": "9781451673319",
+        "branch": 1,
+        "is_borrowed": true,
+        "date_borrowed": "2024-03-22T00:00:00",
+        "borrowed_by": 7
+    },
+    {
+        "title": "Jane Eyre",
+        "author": "Charlotte Brontë",
+        "year": 1847,
+        "isbn": "9780141441146",
+        "branch": 2,
+        "is_borrowed": false,
+        "date_borrowed": null,
+        "borrowed_by": null
+    },
+    {
+        "title": "Brave New World",
+        "author": "Aldous Huxley",
+        "year": 1932,
+        "isbn": "9780060850524",
+        "branch": 3,
+        "is_borrowed": true,
+        "date_borrowed": "2024-06-01T00:00:00",
+        "borrowed_by": 12
+    },
+    {
+        "title": "Moby Dick",
+        "author": "Herman Melville",
+        "year": 1851,
+        "isbn": "9781503280786",
+        "branch": 4,
+        "is_borrowed": false,
+        "date_borrowed": null,
+        "borrowed_by": null
+    },
+    {
+        "title": "War and Peace",
+        "author": "Leo Tolstoy",
+        "year": 1869,
+        "isbn": "9781400079988",
+        "branch": 5,
+        "is_borrowed": true,
+        "date_borrowed": "2024-05-25T00:00:00",
+        "borrowed_by": 9
+    },
+    {
+        "title": "Crime and Punishment",
+        "author": "Fyodor Dostoevsky",
+        "year": 1866,
+        "isbn": "9780140449136",
+        "branch": 1,
+        "is_borrowed": false,
+        "date_borrowed": null,
+        "borrowed_by": null
+    },
+    {
+        "title": "The Brothers Karamazov",
+        "author": "Fyodor Dostoevsky",
+        "year": 1880,
+        "isbn": "9780374528379",
+        "branch": 2,
+        "is_borrowed": true,
+        "date_borrowed": "2024-02-28T00:00:00",
+        "borrowed_by": 11
+    },
+    {
+        "title": "Madame Bovary",
+        "author": "Gustave Flaubert",
+        "year": 1857,
+        "isbn": "9780199535651",
+        "branch": 3,
+        "is_borrowed": false,
+        "date_borrowed": null,
+        "borrowed_by": null
+    },
+    {
+        "title": "The Divine Comedy",
+        "author": "Dante Alighieri",
+        "year": 1320,
+        "isbn": "9780142437223",
+        "branch": 4,
+        "is_borrowed": true,
+        "date_borrowed": "2024-05-01T00:00:00",
+        "borrowed_by": 13
+    },
+    {
+        "title": "The Odyssey",
+        "author": "Homer",
+        "year": -800,
+        "isbn": "9780140268867",
+        "branch": 5,
+        "is_borrowed": false,
+        "date_borrowed": null,
+        "borrowed_by": null
+    },
+    {
+        "title": "The Iliad",
+        "author": "Homer",
+        "year": -750,
+        "isbn": "9780140275360",
+        "branch": 1,
+        "is_borrowed": false,
+        "date_borrowed": null,
+        "borrowed_by": null
+    },
+    {
+        "title": "The Aeneid",
+        "author": "Virgil",
+        "year": -19,
+        "isbn": "9780143106296",
+        "branch": 2,
+        "is_borrowed": true,
+        "date_borrowed": "2024-04-18T00:00:00",
+        "borrowed_by": 4
+    },
+    {
+        "title": "The Canterbury Tales",
+        "author": "Geoffrey Chaucer",
+        "year": 1400,
+        "isbn": "9780140424386",
+        "branch": 3,
+        "is_borrowed": false,
+        "date_borrowed": null,
+        "borrowed_by": null
+    },
+    {
+        "title": "Don Quixote",
+        "author": "Miguel de Cervantes",
+        "year": 1605,
+        "isbn": "9780060934347",
+        "branch": 4,
+        "is_borrowed": true,
+        "date_borrowed": "2024-03-05T00:00:00",
+        "borrowed_by": 6
+    },
+    {
+        "title": "Ulysses",
+        "author": "James Joyce",
+        "year": 1922,
+        "isbn": "9780141182803",
+        "branch": 5,
+        "is_borrowed": false,
+        "date_borrowed": null,
+        "borrowed_by": null
+    },
+    {
+        "title": "In Search of Lost Time",
+        "author": "Marcel Proust",
+        "year": 1913,
+        "isbn": "9780142437964",
+        "branch": 1,
+        "is_borrowed": true,
+        "date_borrowed": "2024-01-10T00:00:00",
+        "borrowed_by": 3
+    },
+    {
+        "title": "One Hundred Years of Solitude",
+        "author": "Gabriel Garcia Marquez",
+        "year": 1967,
+        "isbn": "9780060883287",
+        "branch": 2,
+        "is_borrowed": false,
+        "date_borrowed": null,
+        "borrowed_by": null
+    },
+    {
+        "title": "The Sound and the Fury",
+        "author": "William Faulkner",
+        "year": 1929,
+        "isbn": "9780679732242",
+        "branch": 3,
+        "is_borrowed": true,
+        "date_borrowed": "2024-02-14T00:00:00",
+        "borrowed_by": 19
+    },
+    {
+        "title": "Invisible Man",
+        "author": "Ralph Ellison",
+        "year": 1952,
+        "isbn": "9780679732761",
+        "branch": 4,
+        "is_borrowed": false,
+        "date_borrowed": null,
+        "borrowed_by": null
+    },
+    {
+        "title": "Beloved",
+        "author": "Toni Morrison",
+        "year": 1987,
+        "isbn": "9781400033416",
+        "branch": 5,
+        "is_borrowed": false,
+        "date_borrowed": null,
+        "borrowed_by": null
+    },
+    {
+        "title": "Mrs. Dalloway",
+        "author": "Virginia Woolf",
+        "year": 1925,
+        "isbn": "9780156628709",
+        "branch": 1,
+        "is_borrowed": true,
+        "date_borrowed": "2024-03-30T00:00:00",
+        "borrowed_by": 18
+    },
+    {
+        "title": "Wuthering Heights",
+        "author": "Emily Brontë",
+        "year": 1847,
+        "isbn": "9780141439556",
+        "branch": 2,
+        "is_borrowed": false,
+        "date_borrowed": null,
+        "borrowed_by": null
+    },
+    {
+        "title": "Middlemarch",
+        "author": "George Eliot",
+        "year": 1871,
+        "isbn": "9780141439549",
+        "branch": 3,
+        "is_borrowed": true,
+        "date_borrowed": "2024-01-20T00:00:00",
+        "borrowed_by": 15
+    },
+    {
+        "title": "The Metamorphosis",
+        "author": "Franz Kafka",
+        "year": 1915,
+        "isbn": "9780805210576",
+        "branch": 1,
+        "is_borrowed": false,
+        "date_borrowed": null,
+        "borrowed_by": null
+    },
+    {
+        "title": "Frankenstein",
+        "author": "Mary Shelley",
+        "year": 1818,
+        "isbn": "9780486282114",
+        "branch": 2,
+        "is_borrowed": true,
+        "date_borrowed": "2024-05-02T00:00:00",
+        "borrowed_by": 2
+    },
+    {
+        "title": "Dracula",
+        "author": "Bram Stoker",
+        "year": 1897,
+        "isbn": "9780486411095",
+        "branch": 3,
+        "is_borrowed": false,
+        "date_borrowed": null,
+        "borrowed_by": null
+    },
+    {
+        "title": "The Picture of Dorian Gray",
+        "author": "Oscar Wilde",
+        "year": 1890,
+        "isbn": "9780141439570",
+        "branch": 4,
+        "is_borrowed": true,
+        "date_borrowed": "2024-03-10T00:00:00",
+        "borrowed_by": 14
+    },
+    {
+        "title": "Anna Karenina",
+        "author": "Leo Tolstoy",
+        "year": 1877,
+        "isbn": "9780143035008",
+        "branch": 5,
+        "is_borrowed": false,
+        "date_borrowed": null,
+        "borrowed_by": null
+    },
+    {
+        "title": "Great Expectations",
+        "author": "Charles Dickens",
+        "year": 1861,
+        "isbn": "9780141439563",
+        "branch": 1,
+        "is_borrowed": true,
+        "date_borrowed": "2024-04-18T00:00:00",
+        "borrowed_by": 8
+    },
+    {
+        "title": "The Trial",
+        "author": "Franz Kafka",
+        "year": 1925,
+        "isbn": "9780805209990",
+        "branch": 2,
+        "is_borrowed": false,
+        "date_borrowed": null,
+        "borrowed_by": null
+    },
+    {
+        "title": "Heart of Darkness",
+        "author": "Joseph Conrad",
+        "year": 1899,
+        "isbn": "9780141441672",
+        "branch": 3,
+        "is_borrowed": true,
+        "date_borrowed": "2024-02-01T00:00:00",
+        "borrowed_by": 1
+    },
+    {
+        "title": "Moby-Dick",
+        "author": "Herman Melville",
+        "year": 1851,
+        "isbn": "9780142437247",
+        "branch": 4,
+        "is_borrowed": false,
+        "date_borrowed": null,
+        "borrowed_by": null
+    },
+    {
+        "title": "Les Misérables",
+        "author": "Victor Hugo",
+        "year": 1862,
+        "isbn": "9780451419439",
+        "branch": 5,
+        "is_borrowed": true,
+        "date_borrowed": "2024-03-27T00:00:00",
+        "borrowed_by": 16
+    },
+    {
+        "title": "The Scarlet Letter",
+        "author": "Nathaniel Hawthorne",
+        "year": 1850,
+        "isbn": "9780142437261",
+        "branch": 1,
+        "is_borrowed": false,
+        "date_borrowed": null,
+        "borrowed_by": null
+    },
+    {
+        "title": "Uncle Tom's Cabin",
+        "author": "Harriet Beecher Stowe",
+        "year": 1852,
+        "isbn": "9780142437094",
+        "branch": 2,
+        "is_borrowed": true,
+        "date_borrowed": "2024-05-10T00:00:00",
+        "borrowed_by": 20
+    },
+    {
+        "title": "A Tale of Two Cities",
+        "author": "Charles Dickens",
+        "year": 1859,
+        "isbn": "9780141439600",
+        "branch": 3,
+        "is_borrowed": false,
+        "date_borrowed": null,
+        "borrowed_by": null
+    },
+    {
+        "title": "The Count of Monte Cristo",
+        "author": "Alexandre Dumas",
+        "year": 1844,
+        "isbn": "9780140449266",
+        "branch": 4,
+        "is_borrowed": true,
+        "date_borrowed": "2024-04-25T00:00:00",
+        "borrowed_by": 17
+    },
+    {
+        "title": "The Grapes of Wrath",
+        "author": "John Steinbeck",
+        "year": 1939,
+        "isbn": "9780143039433",
+        "branch": 5,
+        "is_borrowed": false,
+        "date_borrowed": null,
+        "borrowed_by": null
+    },
+    {
+        "title": "East of Eden",
+        "author": "John Steinbeck",
+        "year": 1952,
+        "isbn": "9780142004234",
+        "branch": 1,
+        "is_borrowed": false,
+        "date_borrowed": null,
+        "borrowed_by": null
+    },
+    {
+        "title": "Of Mice and Men",
+        "author": "John Steinbeck",
+        "year": 1937,
+        "isbn": "9780140177398",
+        "branch": 2,
+        "is_borrowed": true,
+        "date_borrowed": "2024-03-15T00:00:00",
+        "borrowed_by": 19
+    },
+    {
+        "title": "The Sun Also Rises",
+        "author": "Ernest Hemingway",
+        "year": 1926,
+        "isbn": "9780743297332",
+        "branch": 3,
+        "is_borrowed": false,
+        "date_borrowed": null,
+        "borrowed_by": null
+    },
+    {
+        "title": "A Farewell to Arms",
+        "author": "Ernest Hemingway",
+        "year": 1929,
+        "isbn": "9780684801469",
+        "branch": 4,
+        "is_borrowed": false,
+        "date_borrowed": null,
+        "borrowed_by": null
+    },
+    {
+        "title": "The Old Man and the Sea",
+        "author": "Ernest Hemingway",
+        "year": 1952,
+        "isbn": "9780684830490",
+        "branch": 5,
+        "is_borrowed": true,
+        "date_borrowed": "2024-02-25T00:00:00",
+        "borrowed_by": 15
+    },
+    {
+        "title": "Gone with the Wind",
+        "author": "Margaret Mitchell",
+        "year": 1936,
+        "isbn": "9780684830681",
+        "branch": 1,
+        "is_borrowed": true,
+        "date_borrowed": "2024-03-12T00:00:00",
+        "borrowed_by": 10
+    },
+    {
+        "title": "Lolita",
+        "author": "Vladimir Nabokov",
+        "year": 1955,
+        "isbn": "9780679723165",
+        "branch": 2,
+        "is_borrowed": false,
+        "date_borrowed": null,
+        "borrowed_by": null
+    },
+    {
+        "title": "Catch-22",
+        "author": "Joseph Heller",
+        "year": 1961,
+        "isbn": "9780684833392",
+        "branch": 3,
+        "is_borrowed": false,
+        "date_borrowed": null,
+        "borrowed_by": null
+    },
+    {
+        "title": "The Bell Jar",
+        "author": "Sylvia Plath",
+        "year": 1963,
+        "isbn": "9780060837020",
+        "branch": 4,
+        "is_borrowed": true,
+        "date_borrowed": "2024-04-02T00:00:00",
+        "borrowed_by": 12
+    },
+    {
+        "title": "Slaughterhouse-Five",
+        "author": "Kurt Vonnegut",
+        "year": 1969,
+        "isbn": "9780385333849",
+        "branch": 5,
+        "is_borrowed": false,
+        "date_borrowed": null,
+        "borrowed_by": null
+    },
+    {
+        "title": "The Catcher in the Rye",
+        "author": "J.D. Salinger",
+        "year": 1951,
+        "isbn": "9780316769488",
+        "branch": 1,
+        "is_borrowed": true,
+        "date_borrowed": "2024-01-31T00:00:00",
+        "borrowed_by": 13
+    },
+    {
+        "title": "To Kill a Mockingbird",
+        "author": "Harper Lee",
+        "year": 1960,
+        "isbn": "9780061120084",
+        "branch": 2,
+        "is_borrowed": false,
+        "date_borrowed": null,
+        "borrowed_by": null
+    },
+    {
+        "title": "The Great Gatsby",
+        "author": "F. Scott Fitzgerald",
+        "year": 1925,
+        "isbn": "9780743273565",
+        "branch": 3,
+        "is_borrowed": false,
+        "date_borrowed": null,
+        "borrowed_by": null
+    },
+    {
+        "title": "Brave New World",
+        "author": "Aldous Huxley",
+        "year": 1932,
+        "isbn": "9780060850524",
+        "branch": 4,
+        "is_borrowed": true,
+        "date_borrowed": "2024-03-19T00:00:00",
+        "borrowed_by": 6
+    },
+    {
+        "title": "1984",
+        "author": "George Orwell",
+        "year": 1949,
+        "isbn": "9780451524935",
+        "branch": 5,
+        "is_borrowed": false,
+        "date_borrowed": null,
+        "borrowed_by": null
+    },
+    {
+        "title": "The Alchemist",
+        "author": "Paulo Coelho",
+        "year": 1988,
+        "isbn": "9780061122415",
+        "branch": 1,
+        "is_borrowed": true,
+        "date_borrowed": "2024-05-20T00:00:00",
+        "borrowed_by": 5
+    },
+    {
+        "title": "The Book Thief",
+        "author": "Markus Zusak",
+        "year": 2005,
+        "isbn": "9780375842206",
+        "branch": 2,
+        "is_borrowed": false,
+        "date_borrowed": null,
+        "borrowed_by": null
+    },
+    {
+        "title": "Life of Pi",
+        "author": "Yann Martel",
+        "year": 2001,
+        "isbn": "9780156027327",
+        "branch": 3,
+        "is_borrowed": true,
+        "date_borrowed": "2024-02-14T00:00:00",
+        "borrowed_by": 7
+    },
+    {
+        "title": "The Road",
+        "author": "Cormac McCarthy",
+        "year": 2006,
+        "isbn": "9780307387899",
+        "branch": 4,
+        "is_borrowed": false,
+        "date_borrowed": null,
+        "borrowed_by": null
+    },
+    {
+        "title": "The Kite Runner",
+        "author": "Khaled Hosseini",
+        "year": 2003,
+        "isbn": "9781594631931",
+        "branch": 5,
+        "is_borrowed": true,
+        "date_borrowed": "2024-04-05T00:00:00",
+        "borrowed_by": 9
+    },
+    {
+        "title": "The Da Vinci Code",
+        "author": "Dan Brown",
+        "year": 2003,
+        "isbn": "9780385504201",
+        "branch": 1,
+        "is_borrowed": false,
+        "date_borrowed": null,
+        "borrowed_by": null
+    },
+    {
+        "title": "Memoirs of a Geisha",
+        "author": "Arthur Golden",
+        "year": 1997,
+        "isbn": "9780679781585",
+        "branch": 2,
+        "is_borrowed": true,
+        "date_borrowed": "2024-03-12T00:00:00",
+        "borrowed_by": 11
+    },
+    {
+        "title": "The Girl with the Dragon Tattoo",
+        "author": "Stieg Larsson",
+        "year": 2005,
+        "isbn": "9780307454546",
+        "branch": 3,
+        "is_borrowed": false,
+        "date_borrowed": null,
+        "borrowed_by": null
+    },
+    {
+        "title": "Gone Girl",
+        "author": "Gillian Flynn",
+        "year": 2012,
+        "isbn": "9780307588371",
+        "branch": 4,
+        "is_borrowed": true,
+        "date_borrowed": "2024-05-01T00:00:00",
+        "borrowed_by": 4
+    },
+    {
+        "title": "The Help",
+        "author": "Kathryn Stockett",
+        "year": 2009,
+        "isbn": "9780399155345",
+        "branch": 5,
+        "is_borrowed": false,
+        "date_borrowed": null,
+        "borrowed_by": null
+    },
+    {
+        "title": "The Hunger Games",
+        "author": "Suzanne Collins",
+        "year": 2008,
+        "isbn": "9780439023528",
+        "branch": 1,
+        "is_borrowed": true,
+        "date_borrowed": "2024-06-03T00:00:00",
+        "borrowed_by": 12
+    },
+    {
+        "title": "Catching Fire",
+        "author": "Suzanne Collins",
+        "year": 2009,
+        "isbn": "9780439023498",
+        "branch": 2,
+        "is_borrowed": false,
+        "date_borrowed": null,
+        "borrowed_by": null
+    },
+    {
+        "title": "Mockingjay",
+        "author": "Suzanne Collins",
+        "year": 2010,
+        "isbn": "9780439023511",
+        "branch": 3,
+        "is_borrowed": true,
+        "date_borrowed": "2024-01-20T00:00:00",
+        "borrowed_by": 8
+    },
+    {
+        "title": "The Maze Runner",
+        "author": "James Dashner",
+        "year": 2009,
+        "isbn": "9780385737957",
+        "branch": 4,
+        "is_borrowed": false,
+        "date_borrowed": null,
+        "borrowed_by": null
+    },
+    {
+        "title": "Divergent",
+        "author": "Veronica Roth",
+        "year": 2011,
+        "isbn": "9780062024039",
+        "branch": 5,
+        "is_borrowed": true,
+        "date_borrowed": "2024-04-18T00:00:00",
+        "borrowed_by": 13
+    },
+    {
+        "title": "The Fault in Our Stars",
+        "author": "John Green",
+        "year": 2012,
+        "isbn": "9780525478812",
+        "branch": 1,
+        "is_borrowed": false,
+        "date_borrowed": null,
+        "borrowed_by": null
+    },
+    {
+        "title": "Looking for Alaska",
+        "author": "John Green",
+        "year": 2005,
+        "isbn": "9780142402511",
+        "branch": 2,
+        "is_borrowed": true,
+        "date_borrowed": "2024-02-25T00:00:00",
+        "borrowed_by": 6
+    },
+    {
+        "title": "Paper Towns",
+        "author": "John Green",
+        "year": 2008,
+        "isbn": "9780142414934",
+        "branch": 3,
+        "is_borrowed": false,
+        "date_borrowed": null,
+        "borrowed_by": null
+    },
+    {
+        "title": "Eleanor & Park",
+        "author": "Rainbow Rowell",
+        "year": 2012,
+        "isbn": "9781250012579",
+        "branch": 4,
+        "is_borrowed": true,
+        "date_borrowed": "2024-05-25T00:00:00",
+        "borrowed_by": 14
+    },
+    {
+        "title": "Fangirl",
+        "author": "Rainbow Rowell",
+        "year": 2013,
+        "isbn": "9781250030955",
+        "branch": 5,
+        "is_borrowed": false,
+        "date_borrowed": null,
+        "borrowed_by": null
+    },
+    {
+        "title": "Me Before You",
+        "author": "Jojo Moyes",
+        "year": 2012,
+        "isbn": "9780670026609",
+        "branch": 1,
+        "is_borrowed": true,
+        "date_borrowed": "2024-01-15T00:00:00",
+        "borrowed_by": 15
+    },
+    {
+        "title": "The Night Circus",
+        "author": "Erin Morgenstern",
+        "year": 2011,
+        "isbn": "9780385534631",
+        "branch": 2,
+        "is_borrowed": false,
+        "date_borrowed": null,
+        "borrowed_by": null
+    },
+    {
+        "title": "The Goldfinch",
+        "author": "Donna Tartt",
+        "year": 2013,
+        "isbn": "9780316055437",
+        "branch": 3,
+        "is_borrowed": true,
+        "date_borrowed": "2024-03-30T00:00:00",
+        "borrowed_by": 3
+    },
+    {
+        "title": "A Game of Thrones",
+        "author": "George R.R. Martin",
+        "year": 1996,
+        "isbn": "9780553103540",
+        "branch": 4,
+        "is_borrowed": false,
+        "date_borrowed": null,
+        "borrowed_by": null
+    },
+    {
+        "title": "A Clash of Kings",
+        "author": "George R.R. Martin",
+        "year": 1998,
+        "isbn": "9780553108033",
+        "branch": 5,
+        "is_borrowed": true,
+        "date_borrowed": "2024-05-15T00:00:00",
+        "borrowed_by": 20
+    },
+    {
+        "title": "A Storm of Swords",
+        "author": "George R.R. Martin",
+        "year": 2000,
+        "isbn": "9780553106633",
+        "branch": 1,
+        "is_borrowed": false,
+        "date_borrowed": null,
+        "borrowed_by": null
+    },
+    {
+        "title": "A Feast for Crows",
+        "author": "George R.R. Martin",
+        "year": 2005,
+        "isbn": "9780553801507",
+        "branch": 2,
+        "is_borrowed": true,
+        "date_borrowed": "2024-04-20T00:00:00",
+        "borrowed_by": 16
+    },
+    {
+        "title": "A Dance with Dragons",
+        "author": "George R.R. Martin",
+        "year": 2011,
+        "isbn": "9780553801477",
+        "branch": 3,
+        "is_borrowed": false,
+        "date_borrowed": null,
+        "borrowed_by": null
+    },
+    {
+        "title": "The Name of the Wind",
+        "author": "Patrick Rothfuss",
+        "year": 2007,
+        "isbn": "9780756404741",
+        "branch": 4,
+        "is_borrowed": true,
+        "date_borrowed": "2024-06-01T00:00:00",
+        "borrowed_by": 18
+    },
+    {
+        "title": "The Wise Man's Fear",
+        "author": "Patrick Rothfuss",
+        "year": 2011,
+        "isbn": "9780756407919",
+        "branch": 5,
+        "is_borrowed": false,
+        "date_borrowed": null,
+        "borrowed_by": null
     }
 ]
