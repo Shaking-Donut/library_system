@@ -12,7 +12,7 @@ class Book(BaseModel):
     branch: int
     is_borrowed: bool = False
     date_borrowed: datetime | None
-    borrowed_by: int | None
+    borrowed_by: str | None
 
 
 class BookAdd(BaseModel):

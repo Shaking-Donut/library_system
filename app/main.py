@@ -3,6 +3,7 @@ from datetime import timedelta
 
 from fastapi import FastAPI, Depends, HTTPException
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
+from fastapi.middleware.cors import CORSMiddleware
 from dotenv import dotenv_values
 
 from . import database
@@ -10,6 +11,22 @@ from . import auth
 from .schemas import Book, BookAdd, Token, User, UserAdd, Branch, BranchAdd
 
 app = FastAPI()
+
+origins = [
+    "http://localhost",
+    "http://localhost:8080",
+    "http://localhost:62626",
+    "http://localhost:*",
+    "*",
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/login/")

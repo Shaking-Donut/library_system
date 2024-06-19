@@ -184,15 +184,16 @@ cur = conn.cursor()
 def get_books(branch_id: str | None = None, search_query: str | None = None) -> list[schemas.Book]:
     if branch_id and search_query:
         cur.execute(sql.SQL(
-            "SELECT * FROM books WHERE branch = %s AND (title %% %s OR author %% %s);"), (branch_id, search_query, search_query))
+            "SELECT books.*, users.username as borrowed_by FROM books LEFT JOIN users ON books.borrowed_by = users.id WHERE books.branch = %s AND (books.title %% %s OR books.author %% %s);"), (branch_id, search_query, search_query))
     elif search_query:
         cur.execute(sql.SQL(
-            "SELECT * FROM books WHERE title %% %s OR author %% %s;"), (search_query, search_query))
+            "SELECT books.*, users.username as borrowed_by FROM books LEFT JOIN users ON books.borrowed_by = users.id WHERE books.title %% %s OR books.author %% %s;"), (search_query, search_query))
     elif branch_id:
-        cur.execute(sql.SQL("SELECT * FROM books WHERE branch = %s;"),
+        cur.execute(sql.SQL("SELECT books.*, users.username as borrowed_by FROM books LEFT JOIN users ON books.borrowed_by = users.id WHERE books.branch = %s;"),
                     (branch_id,))
     else:
-        cur.execute(sql.SQL("SELECT * FROM books;"))
+        cur.execute(sql.SQL(
+            "SELECT books.*, users.username as borrowed_by FROM books LEFT JOIN users ON books.borrowed_by = users.id;"))
     books = cur.fetchall()
     return books
 
